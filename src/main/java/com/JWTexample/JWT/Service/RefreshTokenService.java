@@ -50,5 +50,13 @@ public class RefreshTokenService {
 
         return refreshToken;
     }
+    
+    
+	public void logout(String token) {
+		RefreshToken refreshToken = refreshTokenRepository.findByToken(token)
+				.orElseThrow(() -> new RuntimeException("Invalid refresh token"));
+
+		refreshTokenRepository.delete(refreshToken);
+	}
 }
 

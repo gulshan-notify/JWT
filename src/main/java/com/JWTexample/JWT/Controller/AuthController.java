@@ -96,5 +96,12 @@ public class AuthController {
                 "accessToken", newAccessToken
         ));
     }
+    
+	@PostMapping("/logout")
+	public ResponseEntity<?> logout(@RequestBody RefreshTokenRequest request) {
+		refreshTokenService.logout(request.getRefreshToken());
+		return ResponseEntity.ok("Logged out");
+	}
+
 }
 
