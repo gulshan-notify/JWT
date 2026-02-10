@@ -3,6 +3,7 @@ package com.JWTexample.JWT.Controller;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +33,8 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RefreshTokenService refreshTokenService;
-
+    
+    @PreAuthorize("hasAuthority('CREATE_USER')")
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
 
@@ -78,6 +80,7 @@ public class AuthController {
                 refreshTokenService.createRefreshToken(request.getUsername());
 
         return ResponseEntity.ok(Map.of(
+        		"message","Login Successfull!",
                 "accessToken", accessToken,
                 "refreshToken", refreshToken.getToken()
         ));

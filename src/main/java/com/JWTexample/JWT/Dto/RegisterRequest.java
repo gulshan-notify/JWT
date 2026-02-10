@@ -1,6 +1,6 @@
 package com.JWTexample.JWT.Dto;
 
-import lombok.Data;
+import com.JWTexample.JWT.Entity.Role;
 
 import lombok.Data;
 
@@ -8,5 +8,5 @@ import lombok.Data;
 public class RegisterRequest {
     private String username;
     private String password;
-    private String role;
+    private Role role;
 }

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.JWTexample.JWT.Entity.RefreshToken;
 import com.JWTexample.JWT.Entity.User;
@@ -22,7 +23,8 @@ public class RefreshTokenService {
 
     @Value("${jwt.refresh-expiration}")
     private long refreshExpiration;
-
+    
+    @Transactional
     public RefreshToken createRefreshToken(String username) {
 
         User user = userRepository.findByUsername(username)
